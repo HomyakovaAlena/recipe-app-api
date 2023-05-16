@@ -8,12 +8,14 @@ from django.contrib.auth import get_user_model
 
 from core import models
 
+SAMPLE_EMAIL = 'test@example.com'
+
 
 class ModelTests(TestCase):
     """Test models"""
 
     def test_create_user_with_email_success(self):
-        email = 'test@example.com'
+        email = SAMPLE_EMAIL
         password = 'testpass123'
         user = get_user_model().objects.create_user(
             email=email,
@@ -44,7 +46,7 @@ class ModelTests(TestCase):
     def test_creating_superuser(self):
         """test creating a superuser"""
         user = get_user_model().objects.create_superuser(
-            'test@example.com',
+            SAMPLE_EMAIL,
             'sample123'
             )
         self.assertTrue(user.is_superuser)
@@ -53,7 +55,7 @@ class ModelTests(TestCase):
     def test_create_recipe(self):
         """Test creating a recipe is successful"""
         user = get_user_model().objects.create_user(
-            'test@example.com',
+            SAMPLE_EMAIL,
             'testpass123'
         )
         recipe = models.Recipe.objects.create(
